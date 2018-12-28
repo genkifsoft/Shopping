@@ -33,16 +33,22 @@
          */
         if (empty($errors))
         {
-            // Insert in db.
-            $id_Category = $db->insert('category', $data);
-
-            // insert scuess. Get message suceess redirect to list category.
-            if (isset($id_Category))
+            $isset = $db->fetchOne('category', "name = '". $data['name'] ."'");
+            if ($isset > 0)
             {
-                $_SESSION['success'] = 'Thêm danh mục thành công';
-                redirectAdmin('category');
+                $_SESSION['error'] = 'Tên danh mục đã tồn tại';
             } else {
-                $_SESSION['error'] = 'Thêm danh mục thất bại';
+                // Insert in db.
+                $id_Category = $db->insert('category', $data);
+
+                // insert scuess. Get message suceess redirect to list category.
+                if (isset($id_Category))
+                {
+                    $_SESSION['success'] = 'Thêm danh mục thành công';
+                    redirectAdmin('category');
+                } else {
+                    $_SESSION['error'] = 'Thêm danh mục thất bại';
+                }
             }
         }
     }
@@ -67,6 +73,13 @@
                     <i class="fa fa-file"></i>Thêm mới
                 </li>
             </ol>
+            <div class="clearfix">
+            <?php if(isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger">
+                    <?php echo $_SESSION['error']; unset($_SESSION['error'])?>
+                    </div>
+                <?php endif ?>
+            </div>
         </div>
     </div>
     <!-- /.row -->

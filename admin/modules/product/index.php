@@ -1,5 +1,5 @@
 <?php
-    $open = 'category';
+    $open = 'product';
 
     /**
      * Required file autoload. File general
@@ -8,7 +8,7 @@
     require_once __DIR__."/../../autoload/autoload.php";
     require_once __DIR__."/../../layouts/header.php";
     
-    $category = $db->fetchAll('category');
+    $product = $db->fetchAll('product');
 
 ?>
     
@@ -16,15 +16,15 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Danh sách danh mục
+                Danh Sách Sản phẩm
                 <a href="add.php" class="btn btn-success">Thêm mới</a>
             </h1>
             <ol class="breadcrumb">
                 <li>
-                    <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                    <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url() ?>/admin/moduls">Dashboard</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-file"></i> Danh Mục
+                    <i class="fa fa-file"></i> Sản phẩm
                 </li>
             </ol>
         </div>
@@ -46,8 +46,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($category as $key => $value): ?>
-                    <tr id="row-category-<?php echo $value['id'] ?>">
+                <?php foreach ($product as $key => $value): ?>
+                    <tr id="row-product-<?php echo $value['id'] ?>">
                         <td class="center-column"><?php echo $key +1 ?></td>
                         <td class="center-column"><?php echo $value['name'] ?></td>
                         <td class="center-column"><?php echo $value['slug'] ?></td>
@@ -111,7 +111,7 @@
                   alert('Something is wrong');
                },
                success: function(data) {
-                    $("#row-category-"+id).remove();
+                    $("#row-product-"+id).remove();
                     $("#message").remove();
                     alert(data);
                }

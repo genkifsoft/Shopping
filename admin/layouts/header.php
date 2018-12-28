@@ -99,6 +99,11 @@
                                 <i class="fa fa-list"></i> Danh mục sản phẩm
                             </a>
                         </li>
+                        <li class="<?php echo isset($open) && $open == 'product' ? 'active' : '' ?>">
+                            <a href="<?php echo modules('product') ?>">
+                                <i class="fa fa-database"></i> Sản phẩm
+                            </a>
+                        </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
                         </li>

@@ -9,9 +9,8 @@
 
 
     $id = intval(getInput('id'));
-    var_dump($id);
     $idEdit = $db->fetchID('category', $id);
-
+  
     if (empty($idEdit))
     {
         $_SESSION['error'] = 'Dữ liệu không tồn tại';
@@ -26,14 +25,14 @@
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $data = [
-                'name' => postInput('category'),
+                'name' => trim(postInput('category')),
                 'slug' => to_slug(postInput('category')),
             ];
 
             $errors = [];
             if (postInput('category') == '')
             {
-                $errors['name'] = 'Bạn chưa nhập tên danh mục';
+                $_SESSION['error'] = 'Bạn chưa nhập tên danh mục';
             }
 
             /**
@@ -44,14 +43,23 @@
              */
             if (empty($errors))
             {
-                // Update in db.
-                $id_Edit = $db->update('category', $data, array("id" => $id));
-
-                // update scuess. Get message suceess redirect to list category.
-                if (isset($id_Edit))
-                {
-                    $_SESSION['success'] = 'Cập nhật thành công';
-                    redirectAdmin('category');
+                if ($idEdit['name'] != $data['name']) {
+                    $isset = $db->fetchOne('category', "name = '". $data['name'] ."'");
+                    if ($isset > 0) {
+                        $_SESSION['error'] = 'Tên danh mục đã bị trùng';
+                    } else {
+                        // Update in db.
+                        $id_Edit = $db->update('category', $data, array("id" => $id));
+    
+                        // update scuess. Get message suceess redirect to list category.
+                        if (isset($id_Edit))
+                        {
+                            $_SESSION['success'] = 'Cập nhật thành công';
+                            redirectAdmin('category');
+                        } else {
+                            $_SESSION['error'] = 'Dữ liệu không thay đổi';
+                        }
+                    }
                 } else {
                     $_SESSION['error'] = 'Dữ liệu không thay đổi';
                 }
@@ -66,7 +74,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Thêm mới danh mục
+                Cập nhật danh mục
             </h1>
             <ol class="breadcrumb">
                 <li>
@@ -79,6 +87,11 @@
                     <i class="fa fa-file"></i>Thêm mới
                 </li>
             </ol>
+            <?php if(isset($_SESSION['error'])): ?>
+                <div class="alert alert-danger">
+                    <?php echo $_SESSION['error']; unset($_SESSION['error'])?>
+                </div>
+            <?php endif ?>
         </div>
     </div>
     <!-- /.row -->
@@ -88,9 +101,6 @@
             <label for="inputEmail3" class="col-sm-2 control-label">Tên danh mục</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" name="category" id="category" value="<?php echo $idEdit['name'] ?>" placeholder="Tên Danh Mục">
-                <?php if (isset($errors['name'])): ?>
-                    <p class="text-danger"><?php echo $errors['name'] ?></p>
-                <?php endif ?>
             </div>
         </div>
         <div class="form-group">

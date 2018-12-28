@@ -7,12 +7,14 @@
         <meta name="description" content="">
         <meta name="author" content="">
         <title>SB Admin - Bootstrap Admin Template</title>
-        <!-- Bootstrap Core CSS -->
-        <link href="/public/backend/css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="<?php echo base_url() ?>public/backend/css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link href="/public/backend/css/sb-admin.css" rel="stylesheet">
+        <link href="<?php echo base_url() ?>public/backend/css/sb-admin.css" rel="stylesheet">
         <!-- Custom Fonts -->
-        <link href="/public/backend/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="<?php echo base_url() ?>public/backend/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        
+        <link href="<?php echo base_url() ?>public/backend/css/styles.css" rel="stylesheet">
     </head>
     <body>
         <div id="wrapper">
@@ -89,7 +91,13 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
                         <li>
-                            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                            <a href="<?php echo base_domain() ?>/admin/modules/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        </li>
+                        
+                        <li class="<?php echo isset($open) && $open == 'category' ? 'active' : '' ?>">
+                            <a href="<?php echo modules('category') ?>">
+                                <i class="fa fa-list"></i> Danh mục sản phẩm
+                            </a>
                         </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>

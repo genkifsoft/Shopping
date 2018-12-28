@@ -17,7 +17,7 @@
         <div class="col-lg-12">
             <h1 class="page-header">
                 Danh Sách Sản phẩm
-                <a href="add.php" class="btn btn-success">Thêm mới</a>
+                <a href="add.php" class="btn btn-sm btn-success">Thêm mới</a>
             </h1>
             <ol class="breadcrumb">
                 <li>
@@ -39,8 +39,11 @@
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Name</th>
-                    <th>Slug</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Giảm giá</th>
+                    <th>Hình ảnh</th>
+                    <th>Nội dung</th>
                     <th>Created</th>
                     <th>Action</th>
                 </tr>
@@ -50,11 +53,20 @@
                     <tr id="row-product-<?php echo $value['id'] ?>">
                         <td class="center-column"><?php echo $key +1 ?></td>
                         <td class="center-column"><?php echo $value['name'] ?></td>
-                        <td class="center-column"><?php echo $value['slug'] ?></td>
+                        <td class="center-column"><?php echo $value['price'] ?></td>
+                        <td class="center-column"><?php echo $value['sale'] ?></td>
+                        <td class="center-column">
+                            <img src="<?php echo ROOT.'product/'.$value['thunbar'] ?>">
+                        </td>
+                        <td class="center-column"><?php echo $value['content'] ?></td>
                         <td class="center-column"><?php echo $value['created_at'] ?></td>
                         <td>
-                            <a href="edit.php?id=<?php echo $value['id'] ?>"><button type="button" class="btn btn-xs btn-info"><i class="fa fa-edit"></i>Sửa</button></a>
-                            <a class="click-delete" id="<?php echo $value['id'].'_'.$value['name'] ?>" ><button type="button" class="btn btn-xs btn-danger"><i class="fa fa-times"></i>Xóa</button></a>
+                            <a href="edit.php?id=<?php echo $value['id'] ?>">
+                                <button type="button" class="btn btn-xs btn-info"><i class="fa fa-edit"></i>Sửa</button>
+                            </a>
+                            <a class="click-delete" id="<?php echo $value['id'].'_'.$value['name'] ?>" >
+                                <button type="button" class="btn btn-xs btn-danger"><i class="fa fa-times"></i>Xóa</button>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach ?>

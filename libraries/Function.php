@@ -29,6 +29,20 @@
 		return isset($_POST[$string]) ? $_POST[$string] : '';
 	}
 
+    /**
+     * Create time now
+     * 
+     * return time format(22-10-2018)
+     */
+    function timeNow()
+    {
+        $now = new DateTime();
+        
+        $now->format('Y-m-d');
+        $now->strtotime("now");
+        return $now;
+    }
+
 	/**
 	 * Config link souce code
 	 * 

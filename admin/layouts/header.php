@@ -104,6 +104,11 @@
                                 <i class="fa fa-database"></i> Sản phẩm
                             </a>
                         </li>
+                        <li class="<?php echo isset($open) && $open == 'admin' ? 'active' : '' ?>">
+                            <a href="<?php echo modules('admin') ?>">
+                                <i class="fa fa-user"></i> Admin
+                            </a>
+                        </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
                         </li>

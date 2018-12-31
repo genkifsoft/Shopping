@@ -6,6 +6,8 @@
         </div>
         <!-- /#wrapper -->
         <!-- jQuery -->
+        <script src="<?php echo base_url() ?>partials/message.js"></script>
+
         <script src="<?php echo base_url() ?>public/backend/js/jquery.js"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="<?php echo base_url() ?>public/backend/js/bootstrap.min.js"></script>

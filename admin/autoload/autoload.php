@@ -10,4 +10,5 @@
     $db = new Database;
     
     define('ROOT',$_SERVER['DOCUMENT_ROOT'].'/public/uploads/');
+
 ?>

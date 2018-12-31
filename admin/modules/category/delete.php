@@ -9,14 +9,23 @@
     $id = $_POST['id'];
     $idDelete = $db->fetchID('category', $id);
 
-    if (empty($idDelete))
+    /**
+     * check category exits prpduct
+     */
+    $is_product = $db->fetchOne('product', " category_id = $id ");
+    if ($is_product == NULL)
     {
-        echo 'Dữ liệu không tồn tại';
+        if (empty($idDelete))
+        {
+            echo 'Dữ liệu không tồn tại';
+        } else {
+            $delete = $db->delete('category', $id);
+            $message = '';
+            $delete > 0 ? $message = 'Xóa thành công' : $message = 'Xóa thất bại';
+            echo $message;
+        }
     } else {
-        $delete = $db->delete('category', $id);
-        $message = '';
-        $delete > 0 ? $message = 'Xóa thành công' : $message = 'Xóa thất bại';
-        echo $message;
+        echo false;
     }
    
 ?>

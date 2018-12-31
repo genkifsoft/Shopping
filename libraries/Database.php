@@ -156,7 +156,7 @@
             return mysqli_fetch_assoc($result);
         }
 
-        public function deletesql ($table ,  $sql )
+        public function deletesql($table ,  $sql )
         {
             $sql = "DELETE FROM {$table} WHERE " .$sql;
             // _debug($sql);die;

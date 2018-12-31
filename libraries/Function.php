@@ -37,9 +37,8 @@
     function timeNow()
     {
         $now = new DateTime();
-        
-        $now->format('Y-m-d');
-        $now->strtotime("now");
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        $now->format('Y_m_d_H_m_s');
         return $now;
     }
 

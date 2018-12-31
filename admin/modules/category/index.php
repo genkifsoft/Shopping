@@ -29,7 +29,7 @@
             </ol>
         </div>
     </div>
-    
+
     <!-- Required file notification. Messgae success or failse -->
     <?php require_once __DIR__."/../../../partials/notification.php" ?>
 
@@ -41,6 +41,7 @@
                     <th>STT</th>
                     <th>Name</th>
                     <th>Slug</th>
+                    <th>Home</th>
                     <th>Created</th>
                     <th>Action</th>
                 </tr>
@@ -51,6 +52,11 @@
                         <td class="center-column"><?php echo $key +1 ?></td>
                         <td class="center-column"><?php echo $value['name'] ?></td>
                         <td class="center-column"><?php echo $value['slug'] ?></td>
+                        <td class="center-column">
+                            <a class="btn btn-xs <?php echo $value['home'] == 1 ? 'btn-info' : 'btn-warning' ?>" href="home.php?id=<?php echo $value['id'] ?>">
+                                <?php echo $value['home'] == 1 ? 'Hiển thị' : 'Không'  ?>
+                            </a>
+                        </td>
                         <td class="center-column"><?php echo $value['created_at'] ?></td>
                         <td>
                             <a href="edit.php?id=<?php echo $value['id'] ?>"><button type="button" class="btn btn-xs btn-info"><i class="fa fa-edit"></i>Sửa</button></a>
@@ -84,7 +90,6 @@
     </div>
     </div>
 <?php
-
     /**
      * Required filed footer
      * __DIR__ C:\xampp\htdocs\Shopping\admin\modules
@@ -111,9 +116,13 @@
                   alert('Something is wrong');
                },
                success: function(data) {
-                    $("#row-category-"+id).remove();
-                    $("#message").remove();
-                    alert(data);
+                    if (data != false) {
+                        $("#row-category-"+id).remove();
+                        $("#message").remove();
+                        alert(data);
+                    } else {
+                        alert($message.DELETE_CATEGORY);
+                    }
                }
             });
         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 28, 2018 at 11:30 AM
+-- Generation Time: Dec 31, 2018 at 11:27 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -30,16 +30,27 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
-  `name` int(100) DEFAULT NULL,
-  `address` int(100) DEFAULT NULL,
-  `email` int(100) DEFAULT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` char(15) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `avatar` int(100) DEFAULT NULL,
+  `avatar` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1',
   `level` tinyint(4) DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `password`, `address`, `email`, `phone`, `avatar`, `status`, `level`, `created_at`, `updated_at`) VALUES
+(1, 'Dang QUy', NULL, 'Van dinh', 'quy.dang@mail.com', '0964944719', 'avarta', 1, 1, NULL, NULL),
+(2, 'Lac Hong', NULL, 'address', 'quy.dang@gmail.com', '0964944719', 'avartar', 1, 1, NULL, NULL),
+(3, 'NAME Quy', '202cb962ac59075b964b07152d234b70', 'address', 'address@gmail.com', '0964454', 'avara', 1, 1, NULL, '2018-12-31 08:47:47'),
+(5, 'test anem1', '202cb962ac59075b964b07152d234b70', 'test address', 'tes@gmail.com', '123123', 'chart.png', 1, 1, '2018-12-31 04:37:17', '2018-12-31 08:47:24');
 
 -- --------------------------------------------------------
 
@@ -65,10 +76,32 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`id`, `name`, `slug`, `images`, `banner`, `home`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Dell', 'dell', NULL, NULL, 0, 1, '2018-12-27 02:19:34', '2018-12-27 02:19:34'),
-(2, 'HP', 'hp', NULL, NULL, 0, 1, '2018-12-27 02:19:34', '2018-12-27 02:19:34'),
-(3, 'Assus', 'assus', NULL, NULL, 0, 1, '2018-12-27 04:51:53', '2018-12-27 07:53:03'),
-(22, 'Ace', 'ace', NULL, NULL, 0, 1, '2018-12-28 04:22:37', '2018-12-28 04:35:50'),
-(23, '2', '2', NULL, NULL, 0, 1, '2018-12-28 06:15:33', '2018-12-28 06:15:33');
+(2, 'HP', 'hp', NULL, NULL, 0, 1, '2018-12-27 02:19:34', '2018-12-31 10:17:26'),
+(3, 'Assus', 'assus', NULL, NULL, 0, 1, '2018-12-27 04:51:53', '2018-12-31 10:25:52'),
+(25, 'Lenovol', 'lenovol', NULL, NULL, 0, 1, '2018-12-31 09:38:31', '2018-12-31 10:17:36'),
+(26, 'Acer', 'acer', NULL, NULL, 0, 1, '2018-12-31 09:38:39', '2018-12-31 10:17:35'),
+(27, 'Macbook', 'macbook', NULL, NULL, 1, 1, '2018-12-31 09:39:26', '2018-12-31 10:17:32'),
+(28, 'Microsoft ', 'microsoft', NULL, NULL, 0, 1, '2018-12-31 09:39:36', '2018-12-31 10:17:34'),
+(29, 'Razer ', 'razer', NULL, NULL, 1, 1, '2018-12-31 09:39:50', '2018-12-31 10:22:50'),
+(30, 'Alienware', 'alienware', NULL, NULL, 0, 1, '2018-12-31 09:40:04', '2018-12-31 09:40:04'),
+(31, 'Sony', 'sony', NULL, NULL, 0, 1, '2018-12-31 09:40:10', '2018-12-31 09:40:10'),
+(32, 'Gateway', 'gateway', NULL, NULL, 0, 1, '2018-12-31 09:40:15', '2018-12-31 09:40:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `transaction_id` int(11) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `qty` tinyint(4) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -113,6 +146,21 @@ INSERT INTO `product` (`id`, `name`, `slug`, `category_id`, `content`, `head`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `id` int(11) NOT NULL,
+  `amount` int(11) DEFAULT NULL,
+  `users_id` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -147,10 +195,25 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `transaction_id` (`transaction_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `users_id` (`users_id`);
 
 --
 -- Indexes for table `users`
@@ -166,13 +229,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `product`

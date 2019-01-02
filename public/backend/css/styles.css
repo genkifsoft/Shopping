@@ -1,3 +1,9 @@
 .center-column {
     vertical-align: middle!important;
 }
+#choose-file {
+    height: 63px!important;
+    margin-top: -15px!important;
+    width: 50px!important;
+    margin-bottom: -20px!important;
+}

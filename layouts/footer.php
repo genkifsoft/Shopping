@@ -120,3 +120,14 @@
 <script  src="<?php echo base_url() ?>public/frontend/js/slick.min.js"></script>
 </body>
 </html>
+<script type="text/javascript">
+    $(function() {
+        $hidenitem = $(".hidenitem");
+        $itemproduct = $(".item-product");
+        $itemproduct.hover(function(){
+            $(this).children(".hidenitem").show(100);
+        },function(){
+            $hidenitem.hide(500);
+        })
+    })
+</script>

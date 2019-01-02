@@ -36,10 +36,8 @@
      */
     function timeNow()
     {
-        $now = new DateTime();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
-        $now->format('Y_m_d_H_m_s');
-        return $now;
+        return date('Y_m_d_H_m_s');
     }
 
 	/**
@@ -57,6 +55,16 @@
 		return $url = "";
     }
     
+
+    /*
+     * Function check option selected
+     *
+     */ 
+    function checkSelected($dataKey1, $dataKey2, $key1, $key2)
+    {
+        echo ($dataKey1["$key1"] == $dataKey2["$key2"]) ? 'selected' : '';
+    }
+     
 	/**
 	 * param $url
 	 */
@@ -76,6 +84,27 @@
         {
             header("location: ".base_url()."admin/modules/{$url}");exit();
         }
+    }
+
+    /**
+     * Format number
+     */
+    function formatNumber($number)
+    {
+        $data = intval($number);
+        return number_format($data);
+    }
+
+    /**
+     * Function sale price product
+     */
+    function saleProduct($number, $sale)
+    {
+        $sale = intval($sale);
+        $number = intval($number);
+
+        $data = $number * (100 - $sale) / 100;
+        return number_format($data);
     }
 
 	/**

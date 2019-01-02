@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MaxShop : Đồ án tốt nghiệp</title>
+        <title>Shopping</title>
         <meta charset="utf-8">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/bootstrap.min.css">
@@ -9,7 +9,7 @@
         <script  src="<?php echo base_url() ?>public/frontend/js/bootstrap.min.js"></script>
         <!---->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/slick-theme.css"/>
         <!--slide-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/style.css">
     </head>
@@ -22,7 +22,7 @@
                 <div class="container">
                     <div class="row clearfix">
                         <div class="col-md-6" id="header-text">
-                            <a>TrungPhuNA</a><b>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </b>
+                            <a>Quy Dang</a><b>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do </b>
                         </div>
                         <div class="col-md-6">
                             <nav id="header-nav-top">

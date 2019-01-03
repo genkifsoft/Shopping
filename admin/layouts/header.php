@@ -15,6 +15,8 @@
         <link href="<?php echo base_url() ?>public/backend/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         
         <link href="<?php echo base_url() ?>public/backend/css/styles.css" rel="stylesheet">
+        <script src="<?php echo base_url() ?>public/backend/ckeditor/ckeditor.js"></script>
+        
     </head>
     <body>
         <div id="wrapper">

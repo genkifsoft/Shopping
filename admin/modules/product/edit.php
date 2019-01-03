@@ -174,7 +174,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Nội dung</label>
             <div class="col-sm-8">
-                <textarea name="content" class="form-control" rows="4"><?php echo $idEdit['content'] ?></textarea>
+                <textarea name="content" class="ckeditor" id="editor1" rows="4"><?php echo $idEdit['content'] ?></textarea>
                 <?php if (isset($errors['content'])): ?>
                     <p class="text-danger"><?php echo $errors['content'] ?></p>
                 <?php endif ?>
@@ -185,6 +185,12 @@
                 <button type="submit" class="btn btn-success">Lưu</button>
             </div>
         </div>
+
+        <script>
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace( 'editor1' );
+        </script>
     </form>
 
 <?php

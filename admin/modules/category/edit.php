@@ -27,12 +27,13 @@
             $data = [
                 'name' => trim(postInput('category')),
                 'slug' => to_slug(postInput('category')),
+                'banner' => $_FILES['banner']['name'],
             ];
 
             $errors = [];
             if (postInput('category') == '')
             {
-                $_SESSION['error'] = 'Bạn chưa nhập tên danh mục';
+                $errors['category'] = 'Bạn chưa nhập tên danh mục';
             }
 
             /**
@@ -45,9 +46,16 @@
             {
                 if ($idEdit['name'] != $data['name']) {
                     $isset = $db->fetchOne('category', "name = '". $data['name'] ."'");
+
                     if ($isset > 0) {
                         $_SESSION['error'] = 'Tên danh mục đã bị trùng';
                     } else {
+                        $fileName = timeNow(). '_'.$_FILES['banner']['name'];
+                        $data['banner'] = $fileName;
+                        
+                        // move image from ram temp to forder upload
+                        move_uploaded_file($_FILES["banner"]["tmp_name"],  $_SERVER['DOCUMENT_ROOT'].'/public/frontend/images/slide/'. $fileName);
+
                         // Update in db.
                         $id_Edit = $db->update('category', $data, array("id" => $id));
     
@@ -58,10 +66,12 @@
                             redirectAdmin('category');
                         } else {
                             $_SESSION['error'] = 'Dữ liệu không thay đổi';
+                            redirectAdmin('category');
                         }
                     }
                 } else {
                     $_SESSION['error'] = 'Dữ liệu không thay đổi';
+                    redirectAdmin('category');
                 }
             }
         }
@@ -96,11 +106,20 @@
     </div>
     <!-- /.row -->
 
-   <form class="form-horizontal" action="" method="POST">
+   <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">Tên danh mục</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" name="category" id="category" value="<?php echo $idEdit['name'] ?>" placeholder="Tên Danh Mục">
+                <?php if (isset($errors['category'])): ?>
+                    <p class="text-danger"><?php echo $errors['category'] ?></p>
+                <?php endif ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail3" class="col-sm-2 control-label">Chọn banner</label>
+            <div class="col-sm-3">
+                <input type="file" class="form-control" name="banner">
             </div>
         </div>
         <div class="form-group">

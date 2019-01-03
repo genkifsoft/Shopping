@@ -679,3 +679,20 @@ h1,h2,h3,h4,h5,h6
 .hover-item:hover {
     background-color: red;
 }
+
+.mySlides {display:none;}
+
+.btn-click-left {
+    position: absolute;
+    top: 19%;
+    padding: 10px;
+    border: 10px;
+}
+
+.btn-click-right {
+    position: absolute;
+    top: 19%;
+    right: 15px;
+    padding: 10px;
+    border: 10px;
+}

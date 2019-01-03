@@ -162,7 +162,7 @@
                 </ul> -->
                 <ul>
                     <?php foreach($category as $item): ?>
-                        <li><a href="/danh-muc?id=<?php echo $item['id'] ?>"><?php echo strtoupper($item['name']) ?></a></li>
+                        <li><a href="/danh-muc-san-pham.php?id=<?php echo $item['id'] ?>"><?php echo strtoupper($item['name']) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>

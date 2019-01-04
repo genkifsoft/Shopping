@@ -1,5 +1,4 @@
-<?php
-    session_start();
+<?php session_start();
     /**
      * Required file database and function
      * File autoload is gobal.

@@ -103,12 +103,17 @@
                         </li>
                         <li class="<?php echo isset($open) && $open == 'product' ? 'active' : '' ?>">
                             <a href="<?php echo modules('product') ?>">
-                                <i class="fa fa-database"></i> Sản phẩm
+                                <i class="glyphicon glyphicon-user"></i> Sản phẩm
                             </a>
                         </li>
                         <li class="<?php echo isset($open) && $open == 'admin' ? 'active' : '' ?>">
                             <a href="<?php echo modules('admin') ?>">
                                 <i class="fa fa-user"></i> Admin
+                            </a>
+                        </li>
+                        <li class="<?php echo isset($open) && $open == 'user' ? 'active' : '' ?>">
+                            <a href="<?php echo modules('user') ?>">
+                                <i class="fa fa-users"></i> Users
                             </a>
                         </li>
                         <li>

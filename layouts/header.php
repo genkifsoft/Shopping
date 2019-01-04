@@ -15,7 +15,6 @@
     </head>
     <body>
         <div id="wrapper">
-        <!---->
         <!--HEADER-->
         <div id="header">
             <div id="header-top">
@@ -27,20 +26,24 @@
                         <div class="col-md-6">
                             <nav id="header-nav-top">
                                 <ul class="list-inline pull-right" id="headermenu">
-                                    <li>
-                                        <a href=""><i class="fa fa-unlock"></i> Login</a>
-                                    </li>
-                                    <li>
-                                        <a href=""><i class="fa fa-user"></i> My Account <i class="fa fa-caret-down"></i></a>
-                                        <ul id="header-submenu">
-                                            <li><a href="">Contact</a></li>
-                                            <li><a href="">Cart</a></li>
-                                            <li><a href="">Checkout</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href=""><i class="fa fa-share-square-o"></i> Checkout</a>
-                                    </li>
+                                    <?php if(!isset($_SESSION['name'])): ?>
+                                        <li>
+                                            <a href="dang-ky.php"><i class="fa fa-unlock"></i> Đăng ký</a>
+                                        </li>
+                                        <li>
+                                            <a href="dang-nhap.php"><i class="fa fa-lock"></i> Đăng nhập</a>
+                                        </li>
+                                    <?php else : ?>
+                                        <li style="color:red">Xin chào: <?php echo $_SESSION['name'] ?></li>
+                                        <li>
+                                            <a href=""><i class="fa fa-user"></i> Tài khoản <i class="fa fa-caret-down"></i></a>
+                                            <ul id="header-submenu">
+                                                <li><a href="">Contact</a></li>
+                                                <li><a href="">Cart</a></li>
+                                                <li><a href="../session.php"><i class="fa fa-share-square-o"></i> Thoát</a></li>
+                                            </ul>
+                                        </li>
+                                    <?php endif; ?>
                                 </ul>
                             </nav>
                         </div>

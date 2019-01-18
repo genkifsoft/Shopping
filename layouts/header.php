@@ -94,7 +94,7 @@
             <div class="container">
                 <nav>
                     <div class="home pull-left">
-                        <a href="">Trang chủ</a>
+                        <a href="index.php">Trang chủ</a>
                     </div>
                     <!--menu main-->
                     <ul id="menu-main">

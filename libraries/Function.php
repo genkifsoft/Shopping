@@ -107,6 +107,19 @@
         return number_format($data);
     }
 
+    /**
+     *  Sale
+     */
+    function sale($totalPrice) {
+        $sale = 0;
+        if ($totalPrice > 10000000)
+            $sale = 10;
+        else if ($totalPrice < 9999999)
+                $sale = 5;
+        else $sale = 0;
+        return $sale;
+    }
+
 	/**
     * Replace name to slug. URL
     **/

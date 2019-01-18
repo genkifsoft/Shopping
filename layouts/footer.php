@@ -118,6 +118,7 @@
 </div>      
 </div>
 <script  src="<?php echo base_url() ?>public/frontend/js/slick.min.js"></script>
+<script  src="<?php echo base_url() ?>store.js"></script>
 </body>
 </html>
 <script type="text/javascript">

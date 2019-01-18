@@ -705,3 +705,16 @@ h1,h2,h3,h4,h5,h6
     margin-top: 8px;
     text-align: right;
 }
+
+.imge-cart {
+    width: 80px;
+    height: 93px;
+}
+
+.input-qty {
+    width: 85px;
+}
+
+#shopping-cart .fa{
+    color: #fff;
+}

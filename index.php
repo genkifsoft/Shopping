@@ -42,7 +42,7 @@
                         <div class="hidenitem">
                             <p><a href=""><i class="fa fa-search"></i></a></p>
                             <p><a href=""><i class="fa fa-heart"></i></a></p>
-                            <p><a href=""><i class="fa fa-shopping-basket"></i></a></p>
+                            <p><a href="<?php echo base_domain() ?>add-cart.php?id=<?php echo $item['id'] ?>"><i class="fa fa-shopping-basket"></i></a></p>
                         </div>
                     </div>
                 <?php endforeach; ?>

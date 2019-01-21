@@ -1,4 +1,5 @@
 <?php require_once __DIR__."/autoload/autoload.php"; ?>
+
 <?php require_once __DIR__."/layouts/header.php"; ?>
     <div class="col-md-9 bor">
         <section class="box-main1">
@@ -15,13 +16,13 @@
                         <th scope="col">Thao tác</th>
                     </tr>
                 </thead>
-                <tbody class="cart-items">
+                <tbody class="cart-items" <?php if(isset($_SESSION['cart'])): ?>>
                     <?php $stt = 1; $totalPrice = 0; foreach ($_SESSION['cart'] as $key => $value) : ?>
+                        <div class="error-cart"></div>
                         <tr class="row-cart">
                             <td><?php echo $stt ?></td>
                             <td><?php echo $value['name'] ?></td>
                             <td><img src="public/uploads/product/<?php echo $value['thunbar'] ?>" class="imge-cart"></td>
-                            <!-- onblur=emptyInput(event)  -->
                             <td>
                                 <input type="number" min="1" class="form-control input-qty" value="<?php echo $value['qty'] ?>">
                             </td>
@@ -35,7 +36,7 @@
                             </td>
                         </tr>
                     <?php $stt++; $totalPrice += $value['price'] * $value['qty']; $_SESSION['tongtien'] = $totalPrice; endforeach; ?>
-                </tbody>
+                </tbody <?php endif; ?>>
             </table>
             <div class="col-md-5 pull-right">
                 <ul class="list-group">
@@ -60,6 +61,11 @@
                         <?php $_SESSION['total'] = $_SESSION['tongtien'] * 100 / 100; echo formatNumber($_SESSION['total']) ?>
                         </span> Tổng thanh toán
                     </li>
+                    <span id="total-product">Total: </span>
+                    <div style="margin-top:10px">
+                        <button type="button" onclick="location.href = 'index.php'" class="btn btn-success">Mua hàng tiếp tục</button>
+                        <button type="button" onclick="location.href = 'thanh-toan.php'" class="btn btn-success">Thanh toán</button>
+                    </div>
                 </ul>
             </div>
         </section>

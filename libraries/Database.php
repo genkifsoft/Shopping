@@ -138,7 +138,7 @@
                 }
             }
             return $data;
-        } 
+        }
 
         public function fetchID($table , $id )
         {

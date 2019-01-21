@@ -12,6 +12,7 @@
     // neu chua ton tai thi tao moi
     if ( ! isset($_SESSION['cart'][$id]))
     {
+        $_SESSION['cart'][$id]['id']      = $product['id'];
         $_SESSION['cart'][$id]['name']    = $product['name'];
         $_SESSION['cart'][$id]['thunbar'] = $product['thunbar'];
         $_SESSION['cart'][$id]['price']   = $product['price'];

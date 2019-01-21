@@ -103,7 +103,7 @@
                         </li>
                         <li class="<?php echo isset($open) && $open == 'product' ? 'active' : '' ?>">
                             <a href="<?php echo modules('product') ?>">
-                                <i class="glyphicon glyphicon-user"></i> Sản phẩm
+                                <i class="fa fa-list-alt"></i> Sản phẩm
                             </a>
                         </li>
                         <li class="<?php echo isset($open) && $open == 'admin' ? 'active' : '' ?>">
@@ -114,6 +114,11 @@
                         <li class="<?php echo isset($open) && $open == 'user' ? 'active' : '' ?>">
                             <a href="<?php echo modules('user') ?>">
                                 <i class="fa fa-users"></i> Users
+                            </a>
+                        </li>
+                        <li class="<?php echo isset($open) && $open == 'transaction' ? 'active' : '' ?>">
+                            <a href="<?php echo modules('transaction') ?>">
+                                <i class="fa fa-shopping-cart"></i> Transactrion
                             </a>
                         </li>
                         <li>

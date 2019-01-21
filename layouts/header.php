@@ -12,6 +12,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/slick-theme.css"/>
         <!--slide-->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/style.css">
+        <script src="<?php echo base_url() ?>public/backend/ckeditor/ckeditor.js"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -118,7 +119,7 @@
                     <!--Shopping-->
                     <ul class="pull-right" id="main-shopping">
                         <li>
-                            <a href=""><i class="fa fa-shopping-basket"></i> My Cart </a>
+                            <a href="<?php echo base_url()?>gio-hang.php"><i class="fa fa-shopping-basket"></i> My Cart </a>
                         </li>
                     </ul>
                     <!--end Shopping-->

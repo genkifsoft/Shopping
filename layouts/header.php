@@ -1,3 +1,12 @@
+<?php
+    require_once __DIR__."/../autoload/autoload.php";
+
+    $sql = "SELECT * FROM product WHERE 1 ORDER BY id DESC LIMIT 3";
+    $newProduct = $db->fetchsql($sql);
+    $sqlPay = "SELECT * FROM `product` WHERE 1 ORDER BY pay DESC LIMIT 3";
+    $productPay = $db->fetchsql($sqlPay);
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -220,10 +229,10 @@
                     </li>
                 </ul> -->
                 <ul>
-                    <?php foreach ($product as $key => $value) : ?>
+                    <?php foreach ($newProduct as $key => $value) : ?>
                         <li class="clearfix">
                             <a href="">
-                                <img src="images/16-270x270.png" class="img-responsive pull-left" width="80" height="80">
+                                <img src="public/uploads/product/<?php echo $value['thunbar'] ?>" class="img-responsive pull-left" width="80" height="80">
                                 <div class="info pull-right">
                                     <p class="name"><?php echo $value['name'] ?></p >
                                     <b class="price"><?php echo $value['price'] ?></b><br>
@@ -238,21 +247,25 @@
                 <!-- </marquee> -->
             </div>
             <div class="box-left box-menu">
-                <h3 class="box-title"><i class="fa fa-warning"></i>  Sản phẩm mới </h3>
+                <h3 class="box-title"><i class="fa fa-warning"></i>  Sản phẩm mua nhiều nhất </h3>
                 <!--  <marquee direction="down" onmouseover="this.stop()" onmouseout="this.start()"  > -->
                 <ul>
+                    <?php foreach($productPay as $item): ?>
                     <li class="clearfix">
-                        <a href="">
-                            <img src="images/16-270x270.png" class="img-responsive pull-left" width="80" height="80">
+                        <a href="/chi-tiet-san-pham.php?id=<?php echo $item['id'] ?>">
+                            <img src="public/uploads/product/<?php echo $item['thunbar'] ?>" class="img-responsive pull-left" width="80" height="80">
                             <div class="info pull-right">
-                                <p class="name"> Loa  mới nhất 2016  Loa  mới nhất 2016 Loa  mới nhất 2016</p >
-                                <b class="price">Giảm giá: 6.090.000 đ</b><br>
-                                <b class="sale">Giá gốc: 7.000.000 đ</b><br>
-                                <span class="view"><i class="fa fa-eye"></i> 100000 : <i class="fa fa-heart-o"></i> 10</span>
+                                <p class="name"> <?php echo $item['name'] ?></p >
+                                <b class="price"><?php echo $item['price'] ?></b><br>
+                                <b class="sale"><?php echo $item['sale'] ?>%</b><br>
+                                <span class="view"><i class="fa fa-eye">&nbsp;</i><?php echo $item['view'] ?>&nbsp;
+
+                                <i id="<?php echo $item['id'] ?>" class="fa fa-heart-o like-buy-most">&nbsp;</i><?php echo $item['like'] ?></span>
                             </div>
                         </a>
                     </li>
-                    <li class="clearfix">
+                    <?php endforeach; ?>
+                    <!-- <li class="clearfix">
                         <a href="">
                             <img src="images/16-270x270.png" class="img-responsive pull-left" width="80" height="80">
                             <div class="info pull-right">
@@ -284,8 +297,22 @@
                                 <span class="view"><i class="fa fa-eye"></i> 100000 : <i class="fa fa-heart-o"></i> 10</span>
                             </div>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
                 <!-- </marquee> -->
             </div>
         </div>
+<script>
+    var itemLike = document.getElementsByClassName('like-buy-most');
+    console.log(itemLike);
+    for (let i = 0; i < itemLike.length; i++) {
+        $item = itemLike[i];
+        $item.addEventListener('click', function(e) {
+            e.preventDefault();
+            $attributeID = $item.attributes[0].value;
+
+            console.log('cutString',$attributeID);
+        })
+    }
+    
+</script>

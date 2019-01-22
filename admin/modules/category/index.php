@@ -64,6 +64,19 @@
                         </td>
                     </tr>
                 <?php endforeach ?>
+
+                <form action="export-csv.php" method="POST">
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    <input type="submit" name="export-csv"  value="Export CSV" class="btn btn-sm btn-info" style="margin-bottom:5px">
+                </form>
+                <form action="export-csv.php" method="POST">
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                    <input type="submit" name="export-xlsx"  value="Export Excel" class="btn btn-sm btn-success" style="margin-bottom:5px; margin-left:5px">
+                </form>
+                <form action="export-csv.php" method="POST">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    <input type="submit" name="export-pdf"  value="Export Excel" class="btn btn-sm btn-warning" style="margin-bottom:5px; margin-left:5px">
+                </form>
             </tbody>
         </table>
         <div class="pull-right">

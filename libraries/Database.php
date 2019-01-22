@@ -267,9 +267,15 @@
 
         public function total($sql)
         {
-            $result = mysqli_query($this->link  , $sql);
+            $result = mysqli_query($this->link, $sql);
             $tien = mysqli_fetch_assoc($result);
             return $tien;
+        }
+
+        public function queryExport($sql)
+        {
+            $result = mysqli_query($this->link, $sql);
+            return $result;
         }
     }
    

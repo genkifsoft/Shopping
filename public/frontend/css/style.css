@@ -720,8 +720,9 @@ h1,h2,h3,h4,h5,h6
 }
 
 .f-left {
-    width: 100%;
-    padding-top: 5px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-bottom: 20px;
 }
 .cmt_left {
     color: red;
@@ -735,14 +736,13 @@ h1,h2,h3,h4,h5,h6
 }
 .cmt_right {
     float: right;
+}
+#btnSendCmt {
     background-color: red;
     padding: 5px 20px;
     color: #fff;
-    padding-bottom: 10px;
     border: 2px solid red;
     border-radius: 10px;
-}
-#btnSendCmt {
     font-size: 15px;
     background-color: red;
 }
@@ -756,7 +756,6 @@ h1,h2,h3,h4,h5,h6
 }
 
 .cmt-user {
-    padding-left: 15px;
     margin: 5px;
 }
 .icon-comment{
@@ -768,4 +767,18 @@ h1,h2,h3,h4,h5,h6
 
 i.fa.fa-heart-o:hover {
     background-color: red;
+}
+.img_name_pic {
+    width: 10px;
+    background-color: #ddd;
+    padding: 7px 10px;
+    height: 29px;
+    display: table;
+    float: left;
+    margin-right: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+.time_comment{
+    margin-bottom: 10px;
 }

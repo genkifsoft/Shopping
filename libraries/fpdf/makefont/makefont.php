@@ -381,7 +381,7 @@ function MakeDefinitionFile($file, $type, $enc, $embed, $subset, $map, $info)
 	SaveToFile($file, $s, 't');
 }
 
-function MakeFont($fontfile, $enc='cp1252', $embed=true, $subset=true)
+function MakeFont($fontfile, $enc='cp1258', $embed=true, $subset=true)
 {
 	// Generate a font definition file
 	if(get_magic_quotes_runtime())

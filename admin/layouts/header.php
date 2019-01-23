@@ -121,6 +121,11 @@
                                 <i class="fa fa-shopping-cart"></i> Transactrion
                             </a>
                         </li>
+                        <li class="<?php echo isset($open) && $open == 'comment' ? 'active' : '' ?>">
+                            <a href="<?php echo modules('comment') ?>">
+                                <i class="fa fa-comment"></i> Comment
+                            </a>
+                        </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
                         </li>

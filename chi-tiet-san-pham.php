@@ -10,6 +10,18 @@
             ORDER BY updated_at DESC
             LIMIT 3";
     $productNext = $db->fetchSql($sql);
+
+    $sqlComment = 'SELECT
+                        COMMENT .*, users.`name`
+                    FROM
+                        product
+                    INNER JOIN `comment` ON product.id = `comment`.id_product
+                    INNER JOIN users ON `comment`.user_id = users.id
+                    WHERE
+                        product.id ='. $id .' AND COMMENT.level = 1';
+                    
+    $commentPrduct = $db->fetchSql($sqlComment);
+    
 ?>
 <?php require_once __DIR__."/layouts/header.php"; ?>
 
@@ -80,46 +92,59 @@
                 <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                     <!-- form commnet -->
-                    <form action="comment.php">
-                        <div class="f-left form-add">
-                            <div class="main_form">
-                                <textarea class="form-control" id="review_field" cols="5" rows="5"
-                                placeholder="Xin mời để lại câu hỏi, Chúng tôi sẽ trả lời bạn trong thời gian sớm nhất!" onfocus="comment.backToMainCmt()"></textarea>
-                                <div class="f-left user_action_wrap clearfix">
-                                    <div class="cmt_left">
-                                        <a href="#" class="poli" rel="nofollow">Quy định đăng bình luận</a>
-                                    </div>
-                                    <div class="cmt_right">
-                                        <button type="submit" id="btnSendCmt">Gửi</button>
+                    <div class="f-left form-add">
+                        <div class="main_form">
+                            <form action="comment.php" method="POST">
+                                <div class="comment">
+                                    <textarea name="comment" class="form-control review_field" cols="5" rows="5"
+                                    placeholder="Xin mời để lại câu hỏi, Chúng tôi sẽ trả lời bạn trong thời gian sớm nhất!"></textarea>
+                                    <div class="f-left user_action_wrap clearfix">
+                                        <input type="hidden" name="id_product" value="<?php echo $productID['id'] ?>">
+                                        <div class="cmt_left">
+                                            <a href="#" class="poli" rel="nofollow">Quy định đăng bình luận</a>
+                                        </div>
+                                        <div class="cmt_right">
+                                            <button type="submit" id="btnSendCmt">Gửi</button>
+                                        </div>
                                     </div>
                                 </div>
+                            </form>
                                 <div class="clearfix">
                                     <ul>
-                                        <li class="clearfix">
-                                            <img src="<?php echo base_domain() ?>public/uploads/product/16-270x270.png"
-                                            class="img-responsive pull-left cmt-img">
-                                            <p class="text-name-cmt"><b>Full name</b></p>
-                                        </li>
-                                        <li class="cmt-user"><p>This is tag p</p></li>
-
-                                        <li class="icon-comment" >
-                                            <i class="fa fa-commenting" aria-hidden="true"></i>
-                                            <li>
-                                                <a data-toggle="tab" href="#anscomment"> Trả lời |</a>
-                                                <span class="time-cmt">Time</span>
+                                        <?php foreach($commentPrduct as $item) : ?>
+                                            <li class="clearfix">
+                                                <p class="img_name_pic"><?php echo strtoupper($item['name_img']) ?></p>
+                                                <!-- <img src="<?php echo base_domain() ?>public/uploads/product/16-270x270.png"
+                                                class="img-responsive pull-left cmt-img"> -->
+                                                <p class="text-name-cmt"><b><?php echo $item['name']?></b></p>
                                             </li>
-                                        </li>
+                                            <li class="cmt-user"><p><?php echo $item['content_comment'] ?></p></li>
 
-                                        <div id="anscomment" class="tab-pane fade">
-                                            <h3> Thông tin khác </h3>
-                                            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                            <li class="icon-comment" >
+                                                <i class="fa fa-commenting" aria-hidden="true"></i>
+                                                <li class="time_comment">
+                                                    <a data-toggle="tab" href="#anscomment"> Trả lời |</a>
+                                                    <span class="time-cmt"><?php echo $item['time'] ?></span>
+                                                </li>
+                                            </li>
+                                        <?php endforeach; ?>
+                                        <div id="anscomment" class="tab-pane fade comment">
+                                            <textarea class="form-control review_field" cols="5" rows="5"
+                                                        placeholder="Xin mời để lại câu hỏi, Chúng tôi sẽ trả lời bạn trong thời gian sớm nhất!">
+                                            </textarea>
+                                            <div class="f-left user_action_wrap clearfix">
+                                                <div class="cmt_left">
+                                                    <a href="#" class="poli" rel="nofollow">Quy định đăng bình luận</a>
+                                                </div>
+                                                <div class="cmt_right">
+                                                    <button type="submit" id="btnSendCmt">Gửi</button>
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                    </form>
 
                     </div>
                     <div id="menu1" class="tab-pane fade">
@@ -164,3 +189,15 @@
             </div>
         </div> -->
     <!-- </b> -->
+
+<script>
+    var commentClass = document.getElementsByClassName('comment');
+    var btnSend = document.getElementsByClassName('user_action_wrap');
+    
+    for(let i = 0; i < commentClass.length; i++){
+        commentClass[i].addEventListener('click', function() {
+            // $(commentClass[i]).css("display", "none");
+        });
+    }
+    
+</script>

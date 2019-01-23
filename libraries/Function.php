@@ -40,6 +40,12 @@
         return date('Y_m_d_H_m_s');
     }
 
+    function timeNowComment()
+    {
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        return date('Y-m-d H:m:s');
+    }
+
 	/**
 	 * Config link souce code
 	 * 

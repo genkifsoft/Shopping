@@ -3,6 +3,10 @@
     require_once __DIR__."/../../../libraries/Function.php";
     require_once __DIR__."/../../../libraries/Classes/PHPExcel.php";
     require_once __DIR__."/../../../libraries/fpdf/fpdf.php";
+
+    require_once __DIR__."/../../../libraries/fpdf/makefont/makefont.php";
+
+    MakeFont('ISO-8859-11');
     
     if (isset($_POST['export-csv'])) {
         $export = new ExportFile('category', 'csv');
@@ -36,7 +40,7 @@
             $sheet->setCellValue('A'.$numRow, $row['name']);
             $sheet->setCellValue('B'.$numRow, $row['images']);
             $sheet->setCellValue('C'.$numRow, $row['home']);
-            $sheet->setCellValue('D'.$numRow, $row['status']);
+            $sheet->setCellValue('D'.$numRow, $row['status'] == 1 ? 'Đã xử lý' : 'Chưa xử lý');
             $sheet->setCellValue('E'.$numRow, $row['created_at']);
             $numRow++;
         }
@@ -48,6 +52,7 @@
     } else {
         
         $export = new ExportFile();
+
         $pdf=new FPDF();
         $pdf->AddPage();
         $pdf->Ln();
@@ -73,7 +78,7 @@
             $name = $rows['name'];
             $images = $rows['images'];
             $home = $rows['home'];
-            $status = $rows['status'];
+            $status = $rows['status'] == 1 ? 'Đã xử lý' : 'Chưa xử lý';
             $created_at = $rows['created_at'];
             $pdf->Cell(15,7);
             $pdf->Cell(10,7,$stt);
@@ -84,6 +89,7 @@
             $pdf->Cell(30,7,$created_at);
             $pdf->Ln(); 
         }
+        // var_dump($pdf->Output());die;
         $pdf->Output();
         return;
     }

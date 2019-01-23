@@ -11,7 +11,8 @@
 <html>
     <head>
         <title>Shopping</title>
-        <meta charset="utf-8">
+        <!-- <meta charset="utf-8"> -->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>public/frontend/css/bootstrap.min.css">
         <script  src="<?php echo base_url() ?>public/frontend/js/jquery-3.2.1.min.js"></script>

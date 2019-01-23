@@ -1,5 +1,18 @@
 <?php
-    $open = 'product';
+    $open = 'comment';
+    require_once __DIR__."/../../autoload/autoload.php";
+    require_once __DIR__."/../../layouts/header.php";
+
+    if (isset($_POST['search'])) {
+        $data = [
+            'sort' => $_POST['sort'],
+            'date' => $_POST['date'],
+            'content' => $_POST['content'],
+            'user' => $_POST['user'],
+        ];
+        $db->search('comment', $data);
+        die;
+    }
 
     if (isset($_GET['page']))
     {
@@ -12,21 +25,23 @@
      * Required file autoload. File general
      * Database and funtion.
      */
-    require_once __DIR__."/../../autoload/autoload.php";
-    require_once __DIR__."/../../layouts/header.php";
     
-    $sql = "SELECT product.* FROM product LEFT JOIN category ON product.category_id = category.id";
+    $sql = "SELECT `comment`.*, product.name as product_name, users.`name` as user_name, product.thunbar as thunbar
+                FROM `comment`
+            LEFT JOIN product ON `comment`.id_product = product.id
+            LEFT JOIN users ON `comment`.user_id = users.id";
 
-    $product = $db->fetchJone('product', $sql, $page, 10, true);
-    if ($product['page'] < $page) {
+    $comment = $db->fetchJone('comment', $sql, $page, 10, true);
+
+    if ($comment['page'] < $page) {
         $_SESSION['error'] ="Page này không tồn tại";
         $sotrang = 0 ;
     }
 
-    if ($product['page'])
+    if ($comment['page'])
     {
-        $sotrang = $product['page'];
-        unset($product['page']);
+        $sotrang = $comment['page'];
+        unset($comment['page']);
     }
 ?>
     
@@ -34,7 +49,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Danh Sách Sản phẩm
+                Danh Sách Bình Luận
                 <a href="add.php" class="btn btn-sm btn-success">Thêm mới</a>
             </h1>
             <ol class="breadcrumb">
@@ -42,7 +57,7 @@
                     <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url() ?>/admin/moduls">Dashboard</a>
                 </li>
                 <li class="active">
-                    <i class="fa fa-file"></i> Sản phẩm
+                    <i class="fa fa-file"></i> Bình luận
                 </li>
             </ol>
         </div>
@@ -53,31 +68,55 @@
 
     <div class="row">
         <div class="table-responsive">
+        <div class="col-md-12 pull-right div-search">
+            <!-- search comment -->
+            <form action="" class="form-search" method="POST">
+
+                <div class="row col-md-2">
+                    <div class="form-group">
+                        <select class="form-control" name="sort" id="exampleFormControlSelect1">
+                            <option value="0">Sắp xếp</option>
+                            <option value="1">Tăng dần</option>
+                            <option value="2">Giảm dần</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row col-md-2">
+                    <input class="form-control" type="date" name="date" style="float:left">
+                </div>
+                <div class="row col-md-5">
+                    <input class="form-control" type="text" placeholder="Tìm kiếm theo nội dung" name="content" style="float:left">
+                </div>
+                <div class="row col-md-3">
+                    <input class="form-control" type="text" placeholder="Tìm kiếm theo người dùng" name="user" style="float:left">
+                </div>
+                <div class="row col-md-1">
+                    <input type="submit" value="Search" name="search" class="btn btn-sm btn-info button-search" style="float:left">
+                </div>
+            </form>
+        </div>
         <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Giảm giá</th>
-                    <th>Hình ảnh</th>
-                    <th>Nội dung</th>
-                    <th>Created</th>
+                    <th>Tên nguời dùng</th>
+                    <th>Sản phẩm</th>
+                    <th>Thời gian bình luận</th>
+                    <th>Nội dụng bình luận</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($product as $key => $value): ?>
+                <?php foreach ($comment as $key => $value): ?>
                     <tr id="row-product-<?php echo $value['id'] ?>">
                         <td class="center-column"><?php echo $key +1 ?></td>
-                        <td class="center-column"><?php echo $value['name'] ?></td>
-                        <td class="center-column"><?php echo $value['price'] ?></td>
-                        <td class="center-column"><?php echo $value['sale'] ?></td>
+                        <td class="center-column"><?php echo $value['user_name'] ?></td>
                         <td class="center-column">
                             <img src="<?php echo ROOT.'product/'.$value['thunbar'] ?>">
                         </td>
-                        <td class="center-column"><?php echo $value['content'] ?></td>
-                        <td class="center-column"><?php echo $value['created_at'] ?></td>
+                        <td class="center-column"><?php echo date_parse($value['time'])['day'] .'/'. date_parse($value['time'])['month'] . '/' . date_parse($value['time'])['year']?></td>
+                        <td class="center-column"><?php echo $value['content_comment'] ?></td>
                         <td>
                             <a href="edit.php?id=<?php echo $value['id'] ?>">
                                 <button type="button" class="btn btn-xs btn-info"><i class="fa fa-edit"></i>Sửa</button>

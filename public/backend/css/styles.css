@@ -7,3 +7,15 @@
     width: 50px!important;
     margin-bottom: -20px!important;
 }
+.form-search{
+    position: relative;
+}
+.button-search{
+    left: 20px;
+    top: 3px;
+    right: 2px;
+    position: absolute;
+}
+.div-search{
+    margin-bottom: 5px;
+}

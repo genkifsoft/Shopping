@@ -17,7 +17,25 @@
             mysqli_set_charset($this->link,"utf8");
         }
 
-        
+        /**
+         * Search Data
+         */
+        public function search($table, $data)
+        {
+            $sql = 'WHERE ';
+            foreach($data as $key => $item) {
+                $sql .= $key." LIKE '%". $item ."%'". 'AND ';
+            }
+            var_dump($sql);die;
+
+            // $sql = "SELECT * FROM {$table}";
+            
+            $columns = implode(' LIKE ' , array_keys($data));
+            
+            $values = $columns. implode(' LIKE ' , array_values($data));
+
+
+        }
 
         /**
          * [insert description] hàm insert 

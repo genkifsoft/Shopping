@@ -4,10 +4,6 @@
     require_once __DIR__."/../../../libraries/Classes/PHPExcel.php";
     require_once __DIR__."/../../../libraries/fpdf/fpdf.php";
 
-    require_once __DIR__."/../../../libraries/fpdf/makefont/makefont.php";
-
-    MakeFont('ISO-8859-11');
-    
     if (isset($_POST['export-csv'])) {
         $export = new ExportFile('category', 'csv');
 

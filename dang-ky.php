@@ -1,4 +1,5 @@
-        <?php 
+<?php
+
     require_once __DIR__."/autoload/autoload.php"; 
     if (isset($_SESSION['id']))
     {
@@ -34,12 +35,30 @@
             {
                 $_SESSION['error'] = 'Email đã tồn tại';
             } else {
+                // get config username and pass send mail
+                $sql = "SELECT * FROM config WHERE email = 'quy.dang@seldatinc.com' LIMIT 1";
+
+                $dataEmail = $db->fetchsql($sql);
+
                 $fileName = timeNow(). '_'.$_FILES['avatar']['name'];
                 $data['avatar'] = $fileName;
 
                 // move image from ram temp to forder upload
                 move_uploaded_file($_FILES["avatar"]["tmp_name"], ROOT.'users/'. $fileName);
-                $idUser = $db->insert('users', $data);
+                // $idUser = $db->insert('users', $data);
+
+                $confirm_code = rand();
+
+                $content = "<p>Xin chào <strong> ". $data['name'] ."!</strong></p>
+                            <p>Cảm ơn bạn đang đăng ký web site của tôi! Bạn phải kích hoạt tài khoản mới được sử dụng nó. 
+                            Để kích hoạt tài khoản bạn vui lòng click link bên dưới hoặc sao chép và dán lên trình duyệt: 
+                            <a href='http://ecommer.localhost/xac-nhan-email.php?email=". $data['email'] ."&code=". $confirm_code ."'></a></p>";
+
+                require_once __DIR__.'/libraries/Mail.php';
+
+                $mail = new PHPMail($dataEmail[0]['email'], $dataEmail[0]['password'], $dataEmail[0]['email'], $data['email'], 'My Webstite');
+
+                $mail->smtMailer('Kích hoạt người dùng', $content);
     
                 // insert scuess. Get message suceess redirect to list product.
                 if (isset($idUser))

@@ -4,6 +4,7 @@
     $data = [
         'email'    => trim(postInput('email')),
         'password' => MD5(trim(postInput('password'))),
+        'times_confirm' => 1,
     ];
 
     if($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -51,6 +52,7 @@
                         <?php if (isset($errors['password'])) : ?>
                             <p class="text-danger"><?php echo $errors['password'] ?></p>
                         <?php endif; ?>
+                    <a class="pull-right" href="quen-mat-khau.php"><i class="fa fa-key" aria-hidden="true"></i>Quên mật khẩu</a>
                     </div>
                 </div>
                 <div class="form-group">

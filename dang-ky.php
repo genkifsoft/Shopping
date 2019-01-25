@@ -45,24 +45,24 @@
 
                 // move image from ram temp to forder upload
                 move_uploaded_file($_FILES["avatar"]["tmp_name"], ROOT.'users/'. $fileName);
-                // $idUser = $db->insert('users', $data);
+                $data['time_expire'] = time();
+                $idUser = $db->insert('users', $data);
 
                 $confirm_code = rand();
 
-                $content = "<p>Xin chào <strong> ". $data['name'] ."!</strong></p>
-                            <p>Cảm ơn bạn đang đăng ký web site của tôi! Bạn phải kích hoạt tài khoản mới được sử dụng nó. 
-                            Để kích hoạt tài khoản bạn vui lòng click link bên dưới hoặc sao chép và dán lên trình duyệt: 
-                            <a href='http://ecommer.localhost/xac-nhan-email.php?email=". $data['email'] ."&code=". $confirm_code ."'></a></p>";
+                $content = file_get_contents('teample-mail/register-user.php');
+
+                $content = str_replace('{{name}}', $data['name'], $content);
+                $content = str_replace('{{email}}', $data['email'], $content);
+                $content = str_replace('{{code}}', $confirm_code, $content);
 
                 require_once __DIR__.'/libraries/Mail.php';
-
-                $mail = new PHPMail($dataEmail[0]['email'], $dataEmail[0]['password'], $dataEmail[0]['email'], $data['email'], 'My Webstite');
-
-                $mail->smtMailer('Kích hoạt người dùng', $content);
-    
                 // insert scuess. Get message suceess redirect to list product.
                 if (isset($idUser))
                 {
+                    $mail = new PHPMail($dataEmail[0]['email'], $dataEmail[0]['password'], $dataEmail[0]['email'], $data['email'], 'My Webstite');
+                    $mail->smtMailer('Kích hoạt người dùng', $content);
+                    
                     $_SESSION['success'] = 'Thêm người dùng thành công';
                     redirectAdmin('/../../../dang-nhap.php');
                 } else {
